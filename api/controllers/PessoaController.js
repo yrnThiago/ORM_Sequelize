@@ -85,6 +85,86 @@ class PessoaController {
     }
   }
 
+  static async pegaMatriculaPorId(req, res) {
+    try {
+      const {estudanteId, matriculaId} = req.params;
+      const matriculaResultado = await database.Matriculas.findOne({
+        where: {
+          id: Number(matriculaId),
+          estudante_id: Number(estudanteId)
+        }
+      });
+
+      if(matriculaResultado !== null) {
+        return res.status(200).json(matriculaResultado);
+      } else {
+        return res.status(404).json({message: "Matricula ID não encontrado!"});
+      }
+
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"})
+    }
+  }
+
+  static async criaMatricula(req, res) {
+    try {
+      const { estudanteId } = req.params;
+      const novaMatricula = {...req.body, estudante_id: Number(estudanteId)};
+      
+      const novaMatriculaCriada = await database.Matriculas.create(novaMatricula);
+
+      return res.status(200).json(novaMatriculaCriada);
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"})
+    }
+  }
+
+  static async atualizaMatriculaPorID(req, res) {
+    try {
+      const {estudanteId, matriculaId} = req.params;
+      await database.Matriculas.update(req.body,{
+        where: {
+          id: Number(matriculaId),
+          estudante_id: Number(estudanteId)
+        }
+      });
+
+      const matriculaAtualizada = await database.Matriculas.findOne({
+        where: {
+          id: Number(matriculaId)
+        }
+      });
+
+      if(matriculaAtualizada != null) {
+        return res.status(200).json(matriculaAtualizada); 
+      } else {
+        return res.status(404).json({message: "Matricula ID não encontrado!"});
+      }
+      
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"});
+    }
+  }
+
+  static async deletaMatriculaPorID(req, res) {
+    try {
+      const {estudanteId, matriculaId} = req.params;
+      const matriculaDeletada = await database.Matriculas.destroy({
+        where: {
+          id: Number(matriculaId)
+        }
+      });
+
+      if(matriculaDeletada) {
+        return res.status(200).json({message: `Matricula ID ${matriculaId} deletada com sucesso!`});
+      } else {
+        return res.status(404).json({message: "Matricula ID não encontrado!"});
+      }
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"});
+    }
+  }
+
 }
 
 module.exports = PessoaController;
