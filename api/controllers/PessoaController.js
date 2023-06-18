@@ -1,9 +1,19 @@
 const database = require("../models");
 
 class PessoaController {
+  static async pegaPessoasAtivas(req, res) {
+    try {
+      const pessoasAtivas = await database.Pessoas.findAll();
+
+      return res.status(200).json(pessoasAtivas);
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"})
+    }
+  }
+
   static async pegaTodasAsPessoas(req, res) {
     try {
-      const todasAsPessoas = await database.Pessoas.findAll();
+      const todasAsPessoas = await database.Pessoas.scope("todos").findAll();
 
       return res.status(200).json(todasAsPessoas);
     } catch (error) {
@@ -194,7 +204,7 @@ class PessoaController {
         }
       });
 
-      if(matriculaRestaurada != 0) {
+      if(matriculaRestaurada) {
         return res.status(200).json({message: `Matricula ID ${matriculaId} restaurada com sucesso!`});
       } else {
         return res.status(404).json({message: "Matricula ID não encontrado!"});
@@ -203,7 +213,7 @@ class PessoaController {
       return res.status(500).json({message: "Erro interno do servidor!"});
     }
   }
-  
+
 }
 
 module.exports = PessoaController;
