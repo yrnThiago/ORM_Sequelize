@@ -10,6 +10,7 @@ router.post('/pessoas/:estudanteId/matricula/:matriculaId/restaura', PessoaContr
 router.get('/pessoas', PessoaController.pegaPessoasAtivas);
 router.get('/pessoas/todos', PessoaController.pegaTodasAsPessoas);
 router.get('/pessoas/:id', PessoaController.pegaPessoaPorId);
+router.get('/pessoas/:estudanteId/matricula', PessoaController.pegaMatriculas);
 router.put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.atualizaMatriculaPorID);
 router.put('/pessoas/:id', PessoaController.atualizaPessoaPorID);
 router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.pegaMatriculaPorId);
