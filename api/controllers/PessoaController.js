@@ -85,6 +85,25 @@ class PessoaController {
     }
   }
 
+  static async restauraPessoaPorID(req, res) {
+    try {
+      const {id} = req.params;
+      const pessoaRestaurada = await database.Pessoas.restore({
+        where: {
+          id: Number(id)
+        }
+      });
+
+      if(pessoaRestaurada) {
+        return res.status(200).json({message: `Pessoa ID ${id} restaurada com sucesso!`});
+      } else {
+        return res.status(404).json({message: "Pessoa ID não encontrado!"});
+      }
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"});
+    }
+  }
+
   static async pegaMatriculaPorId(req, res) {
     try {
       const {estudanteId, matriculaId} = req.params;
@@ -165,6 +184,26 @@ class PessoaController {
     }
   }
 
+  static async restauraMatriculaPorID(req, res) {
+    const { estudanteId, matriculaId } = req.params;
+    try {
+      const matriculaRestaurada = await database.Matriculas.restore({
+        where: {
+          id: Number(matriculaId),
+          estudante_id: Number(estudanteId)
+        }
+      });
+
+      if(matriculaRestaurada != 0) {
+        return res.status(200).json({message: `Matricula ID ${matriculaId} restaurada com sucesso!`});
+      } else {
+        return res.status(404).json({message: "Matricula ID não encontrado!"});
+      }
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"});
+    }
+  }
+  
 }
 
 module.exports = PessoaController;

@@ -85,6 +85,25 @@ class NivelController {
     }
   }
 
+  static async restauraNivelPorID(req, res) {
+    try {
+      const {id} = req.params;
+      const nivelRestaurado = await database.Niveis.restore({
+        where: {
+          id: Number(id)
+        }
+      });
+
+      if(nivelRestaurado) {
+        return res.status(200).json({message: `Nivel ID ${id} restaurado com sucesso!`});
+      } else {
+        return res.status(404).json({message: "Nivel ID não encontrado!"});
+      }
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"});
+    }
+  }
+
 }
 
 module.exports = NivelController;

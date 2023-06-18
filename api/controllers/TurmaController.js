@@ -85,6 +85,25 @@ class TurmaController {
     }
   }
 
+  static async restauraTurmaPorID(req, res) {
+    try {
+      const {id} = req.params;
+      const turmaRestaurada = await database.Turmas.restore({
+        where: {
+          id: Number(id)
+        }
+      });
+
+      if(turmaRestaurada) {
+        return res.status(200).json({message: `Turma ID ${id} restaurada com sucesso!`});
+      } else {
+        return res.status(404).json({message: "Turma ID não encontrado!"});
+      }
+    } catch (error) {
+      return res.status(500).json({message: "Erro interno do servidor!"});
+    }
+  }
+
 }
 
 module.exports = TurmaController;
