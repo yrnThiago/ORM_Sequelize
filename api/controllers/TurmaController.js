@@ -7,7 +7,7 @@ class TurmaController {
 
       return res.status(200).json(todasAsTurmas);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -27,7 +27,7 @@ class TurmaController {
       }
 
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -37,7 +37,7 @@ class TurmaController {
 
       return res.status(200).json(novaTurma);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -62,7 +62,7 @@ class TurmaController {
       }
       
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -81,7 +81,7 @@ class TurmaController {
         return res.status(404).json({message: "Turma ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -100,7 +100,7 @@ class TurmaController {
         return res.status(404).json({message: "Turma ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 

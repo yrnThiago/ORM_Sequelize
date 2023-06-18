@@ -7,7 +7,7 @@ class NivelController {
 
       return res.status(200).json(todosOsNiveis);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -27,7 +27,7 @@ class NivelController {
       }
 
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -37,7 +37,7 @@ class NivelController {
 
       return res.status(200).json(novoNivel);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -62,7 +62,7 @@ class NivelController {
       }
       
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -81,7 +81,7 @@ class NivelController {
         return res.status(404).json({message: "Nivel ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -100,7 +100,7 @@ class NivelController {
         return res.status(404).json({message: "Nivel ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 

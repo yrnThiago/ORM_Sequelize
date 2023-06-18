@@ -7,7 +7,7 @@ class PessoaController {
 
       return res.status(200).json(pessoasAtivas);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -17,7 +17,7 @@ class PessoaController {
 
       return res.status(200).json(todasAsPessoas);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -37,7 +37,7 @@ class PessoaController {
       }
 
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -47,7 +47,7 @@ class PessoaController {
 
       return res.status(200).json(novaPessoa);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -72,7 +72,7 @@ class PessoaController {
       }
       
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -91,7 +91,7 @@ class PessoaController {
         return res.status(404).json({message: "Pessoa ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -110,7 +110,7 @@ class PessoaController {
         return res.status(404).json({message: "Pessoa ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -131,7 +131,7 @@ class PessoaController {
       }
 
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -144,7 +144,7 @@ class PessoaController {
 
       return res.status(200).json(novaMatriculaCriada);
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"})
+      return res.status(500).json(error.message)
     }
   }
 
@@ -171,7 +171,7 @@ class PessoaController {
       }
       
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -190,7 +190,7 @@ class PessoaController {
         return res.status(404).json({message: "Matricula ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
@@ -210,7 +210,7 @@ class PessoaController {
         return res.status(404).json({message: "Matricula ID não encontrado!"});
       }
     } catch (error) {
-      return res.status(500).json({message: "Erro interno do servidor!"});
+      return res.status(500).json(error.message);
     }
   }
 
