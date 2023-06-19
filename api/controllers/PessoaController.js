@@ -1,4 +1,5 @@
 const database = require("../models");
+const Sequelize = require("sequelize");
 
 class PessoaController {
   static async pegaPessoasAtivas(req, res) {
@@ -249,6 +250,29 @@ class PessoaController {
 
       if(todasAsMatriculas) {
         return res.status(200).json(todasAsMatriculas);
+      } else {
+        return res.status(404).json({message: "Matricula ID não encontrado!"});
+      }
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async pegaTurmasLotadas(req, res) {
+    try {
+      const lotacaoTurma = 2;
+
+      const turmasLotadas = await database.Matriculas.findAndCountAll({
+        where: {
+          status: "confirmado"
+        },
+        attributes : ["turma_id"],
+        group: ["turma_id"],
+        having: Sequelize.literal(`count(turma_id) >= ${lotacaoTurma}`)
+      })
+
+      if(turmasLotadas) {
+        return res.status(200).json(turmasLotadas.count);
       } else {
         return res.status(404).json({message: "Matricula ID não encontrado!"});
       }
