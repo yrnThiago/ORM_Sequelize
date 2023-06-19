@@ -7,6 +7,7 @@ router.post('/pessoas/', PessoaController.criaPessoa);
 router.post('/pessoas/:estudanteId/matricula', PessoaController.criaMatricula);
 router.post('/pessoas/:id/restaura', PessoaController.restauraPessoaPorID);
 router.post('/pessoas/:estudanteId/matricula/:matriculaId/restaura', PessoaController.restauraMatriculaPorID);
+router.post('/pessoas/:estudanteId/cancela', PessoaController.cancelaPessoa);
 router.get('/pessoas', PessoaController.pegaPessoasAtivas);
 router.get('/pessoas/todos', PessoaController.pegaTodasAsPessoas);
 router.get('/pessoas/:id', PessoaController.pegaPessoaPorId);
