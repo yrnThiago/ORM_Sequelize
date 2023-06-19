@@ -1,9 +1,12 @@
-const database = require("../models");
+// const database = require("../models");
+
+const Services = require("../services/Services.js");
+const niveisServices = new Services("Niveis");
 
 class NivelController {
   static async pegaTodosOsNiveis(req, res) {
     try {
-      const todosOsNiveis = await database.Niveis.findAll();
+      const todosOsNiveis = await niveisServices.pegaTodosOsRegistros();
 
       return res.status(200).json(todosOsNiveis);
     } catch (error) {
@@ -14,11 +17,7 @@ class NivelController {
   static async pegaNivelPorId(req, res) {
     try {
       const {id} = req.params;
-      const nivelResultado = await database.Niveis.findOne({
-        where: {
-          id: Number(id)
-        }
-      });
+      const nivelResultado = await niveisServices.pegaUmRegistro({ id });
 
       if(nivelResultado !== null) {
         return res.status(200).json(nivelResultado);
@@ -33,7 +32,7 @@ class NivelController {
 
   static async criaNivel(req, res) {
     try {
-      const novoNivel = await database.Niveis.create(req.body);
+      const novoNivel = await await niveisServices.criaRegistro(req.body);
 
       return res.status(200).json(novoNivel);
     } catch (error) {
@@ -44,16 +43,8 @@ class NivelController {
   static async atualizaNivelPorID(req, res) {
     try {
       const {id} = req.params;
-      await database.Niveis.update(req.body,{
-        where: {
-          id: Number(id)
-        }
-      });
-      const nivelAtualizado = await database.Niveis.findOne({
-        where: {
-          id: Number(id)
-        }
-      });
+      await niveisServices.atualizaRegistro(req.body, id);
+      const nivelAtualizado = await await niveisServices.pegaUmRegistro(Number(id));
 
       if(nivelAtualizado != null) {
         return res.status(200).json(nivelAtualizado); 
@@ -69,11 +60,7 @@ class NivelController {
   static async deletaNivelPorID(req, res) {
     try {
       const {id} = req.params;
-      const nivelDeletado = await database.Niveis.destroy({
-        where: {
-          id: Number(id)
-        }
-      });
+      const nivelDeletado = await niveisServices.apagaRegistro(id);
 
       if(nivelDeletado) {
         return res.status(200).json({message: `Nivel ID: ${id} deletada com sucesso!`});
@@ -88,11 +75,7 @@ class NivelController {
   static async restauraNivelPorID(req, res) {
     try {
       const {id} = req.params;
-      const nivelRestaurado = await database.Niveis.restore({
-        where: {
-          id: Number(id)
-        }
-      });
+      const nivelRestaurado = await niveisServices.restauraRegistro(id);
 
       if(nivelRestaurado) {
         return res.status(200).json({message: `Nivel ID ${id} restaurado com sucesso!`});
